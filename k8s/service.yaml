@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bovo-admin
+  namespace: bovo-admin
+  labels:
+    app: bovo-admin
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app: bovo-admin
+---
+# Backend Service (for API proxy)
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: bovo-admin
+  labels:
+    app: backend
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http

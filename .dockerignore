@@ -1,0 +1,57 @@
+# 依赖目录
+node_modules
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# 构建产物
+dist
+dist-ssr
+*.local
+
+# 编辑器目录和文件
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 测试覆盖率
+coverage
+*.lcov
+
+# 环境变量文件（.env.* 文件保留用于构建，但 .env.local 忽略）
+.env.local
+.env.development.local
+.env.test.local
+.env.staging.local
+.env.production.local
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# 文档
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Docker 文件（避免递归复制）
+Dockerfile
+.dockerignore
+docker-compose*.yaml
+
+# Kubernetes 配置
+k8s/
+
+# 其他
+.old-vue
+cache
+temp
+tmp

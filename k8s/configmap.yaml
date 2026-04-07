@@ -1,0 +1,14 @@
+# ConfigMap for application configuration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bovo-admin-config
+  namespace: bovo-admin
+  labels:
+    app: bovo-admin
+data:
+  # API endpoint configuration (can be referenced in build)
+  API_BASE_URL: "/api"
+
+  # Environment
+  ENVIRONMENT: "production"
