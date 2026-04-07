@@ -1,0 +1,103 @@
+/* CmEditor.css */
+.cm-editor-ckeditor {
+  width: 100%;
+  position: relative;
+}
+
+/* WangEditor 容器样式 - 添加灰色边框 */
+.cm-editor-wangeditor {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* 加载状态 */
+.cm-editor-loading {
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border-radius: 6px;
+  border: 1px dashed #d9d9d9;
+}
+
+.cm-editor-loading::after {
+  content: '加载编辑器中...';
+  color: #999;
+  font-size: 14px;
+}
+
+/* 错误状态 */
+.cm-editor-error {
+  min-height: 200px;
+  padding: 24px;
+  background: #fff2f0;
+  border: 1px solid #ffccc7;
+  border-radius: 6px;
+  color: #ff4d4f;
+}
+
+.cm-editor-error h4 {
+  margin-top: 0;
+  color: #ff4d4f;
+}
+
+/* 工具栏自定义 */
+.ck.ck-toolbar {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #fff;
+}
+
+.ck.ck-toolbar .ck.ck-toolbar__separator {
+  margin: 0 4px;
+}
+
+/* 内容区域 */
+.ck.ck-editor__editable.ck-focused:not(.ck-editor__nested-editable) {
+  border: none;
+  box-shadow: none;
+}
+
+/* 表格样式 */
+.ck-content table {
+  margin: 1em 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ck-content table td,
+.ck-content table th {
+  border: 1px solid #bfbfbf;
+  padding: 4px 8px;
+  min-width: 50px;
+}
+
+/* 引用块样式 */
+.ck-content blockquote {
+  border-left: 4px solid #1890ff;
+  margin: 1em 0;
+  padding-left: 1em;
+  font-style: italic;
+  color: #666;
+}
+
+/* 代码块样式 */
+.ck-content pre {
+  background: #f6f8fa;
+  border-radius: 4px;
+  padding: 16px;
+  overflow: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+.ck-content code {
+  background: #f6f8fa;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}

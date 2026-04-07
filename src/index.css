@@ -1,0 +1,263 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* 全局滚动条样式优化 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) rgba(0, 0, 0, 0.05);
+}
+
+/* Webkit 浏览器全局滚动条 */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.ant-layout {
+  min-height: 100vh;
+}
+
+.site-layout-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
+}
+
+.logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.ant-row-rtl .logo {
+  float: right;
+  margin: 16px 0 16px 16px;
+}
+
+/* 自定义侧边栏主题 - 深色模式 */
+.custom-sider-theme.custom-sider-dark .ant-pro-sider {
+  background: #001529 !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-layout-sider {
+  background: #001529 !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-menu {
+  background: #001529 !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-menu-root {
+  background: #001529 !important;
+}
+
+/* 侧边栏滚动条样式优化 - 深色主题 */
+.ant-pro-layout .ant-layout-sider.ant-pro-sider,
+.ant-pro-sider {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+/* Webkit 浏览器滚动条样式 */
+.ant-pro-layout .ant-layout-sider.ant-pro-sider::-webkit-scrollbar,
+.ant-pro-sider::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ant-pro-layout .ant-layout-sider.ant-pro-sider::-webkit-scrollbar-track,
+.ant-pro-sider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-pro-layout .ant-layout-sider.ant-pro-sider::-webkit-scrollbar-thumb,
+.ant-pro-sider::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.ant-pro-layout .ant-layout-sider.ant-pro-sider::-webkit-scrollbar-thumb:hover,
+.ant-pro-sider::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 侧边栏菜单容器滚动条 */
+.ant-pro-layout .ant-layout-sider .ant-menu-root,
+.ant-pro-sider .ant-menu-root {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.ant-pro-layout .ant-layout-sider .ant-menu-root::-webkit-scrollbar,
+.ant-pro-sider .ant-menu-root::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ant-pro-layout .ant-layout-sider .ant-menu-root::-webkit-scrollbar-track,
+.ant-pro-sider .ant-menu-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ant-pro-layout .ant-layout-sider .ant-menu-root::-webkit-scrollbar-thumb,
+.ant-pro-sider .ant-menu-root::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.ant-pro-layout .ant-layout-sider .ant-menu-root::-webkit-scrollbar-thumb:hover,
+.ant-pro-sider .ant-menu-root::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* 侧边栏菜单项颜色 */
+.custom-sider-theme.custom-sider-dark .ant-menu-item,
+.custom-sider-theme.custom-sider-dark .ant-menu-submenu-title {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-menu-item:hover,
+.custom-sider-theme.custom-sider-dark .ant-menu-submenu-title:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-menu-item-selected {
+  background: #1890ff !important;
+  color: #fff !important;
+}
+
+/* 侧边栏标题和 logo 区域 */
+.custom-sider-theme.custom-sider-dark .ant-pro-sider-logo {
+  background: #002140 !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-pro-sider-collapsed-button {
+  background: #001529 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.custom-sider-theme.custom-sider-dark .ant-pro-sider-collapsed-button:hover {
+  color: #fff !important;
+}
+
+/* 自定义侧边栏主题 - 浅色模式 */
+.custom-sider-theme.custom-sider-light .ant-pro-sider {
+  background: #fff !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-layout-sider {
+  background: #fff !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu {
+  background: #fff !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root {
+  background: #fff !important;
+}
+
+/* 侧边栏滚动条样式优化 - 浅色主题 */
+.custom-sider-theme.custom-sider-light .ant-pro-sider {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-root::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* 侧边栏菜单项颜色 */
+.custom-sider-theme.custom-sider-light .ant-menu-item,
+.custom-sider-theme.custom-sider-light .ant-menu-submenu-title {
+  color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-item:hover,
+.custom-sider-theme.custom-sider-light .ant-menu-submenu-title:hover {
+  color: #1890ff !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-menu-item-selected {
+  background: #e6f4ff !important;
+  color: #1890ff !important;
+}
+
+/* 侧边栏标题和 logo 区域 */
+.custom-sider-theme.custom-sider-light .ant-pro-sider-logo {
+  background: #fff !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider-collapsed-button {
+  background: #fff !important;
+  border-top: 1px solid #f0f0f0;
+  color: rgba(0, 0, 0, 0.65) !important;
+}
+
+.custom-sider-theme.custom-sider-light .ant-pro-sider-collapsed-button:hover {
+  color: #1890ff !important;
+} 

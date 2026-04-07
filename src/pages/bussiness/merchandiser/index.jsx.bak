@@ -1,0 +1,293 @@
+import React, { useState } from 'react';
+import { message, Tag, Form, Input, InputNumber, Radio } from 'antd';
+import CmBasePage from '@components/CmBasePage';
+import DataForm from '@components/DataForm';
+import { getOtcMerchantList } from '@api';
+
+const { TextArea } = Input;
+
+/**
+ * OTC商家管理页面
+ * 功能：商家列表展示、新增商家、编辑商家、删除商家、商家审核、商家状态管理
+ */
+const OtcMerchantPage = () => {
+  // 1. 状态管理
+  const [formVisible, setFormVisible] = useState(false);
+  const [editingRecord, setEditingRecord] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // 2. 事件处理函数
+  /**
+   * 打开新增表单
+   */
+  const handleAdd = () => {
+    setEditingRecord(null);
+    setFormVisible(true);
+  };
+
+  /**
+   * 打开编辑表单
+   */
+  const handleEdit = (record) => {
+    setEditingRecord(record);
+    setFormVisible(true);
+  };
+
+  /**
+   * 删除商家
+   */
+  const handleDelete = async (record) => {
+    try {
+      // TODO: 调用删除API
+      // const response = await deleteOtcMerchant({ id: record.id });
+      message.success('删除成功');
+      refreshTable();
+    } catch (error) {
+      message.error('删除失败: ' + error.message);
+    }
+  };
+
+  /**
+   * 提交表单（新增/编辑）
+   */
+  const handleSubmit = async (values) => {
+    setLoading(true);
+    try {
+      // TODO: 调用新增/编辑API
+      // const response = editingRecord
+      //   ? await updateOtcMerchant(submitData)
+      //   : await saveOtcMerchant(submitData);
+
+      message.success(editingRecord ? '更新成功' : '添加成功');
+      setFormVisible(false);
+      refreshTable();
+    } catch (error) {
+      message.error('操作失败: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /**
+   * 刷新表格
+   */
+  const refreshTable = () => {
+    document.querySelector('.ant-pro-table')?.parentNode?.dispatchEvent(
+      new CustomEvent('reload')
+    );
+  };
+
+  // 3. 状态映射配置
+  /**
+   * 认证状态映射
+   * 0: 认证通过(绿色)
+   * 1: 未认证(橙色)
+   */
+  const statusMap = {
+    0: { color: 'green', text: '认证通过' },
+    1: { color: 'orange', text: '未认证' },
+  };
+
+  // 4. 列配置
+  const columns = [
+    {
+      title: '用户ID',
+      dataIndex: 'userId',
+      key: 'userId',
+      width: 120,
+      sorter: true,
+    },
+    {
+      title: '登录名',
+      dataIndex: 'username',
+      key: 'username',
+      width: 150,
+      sorter: true,
+    },
+    {
+      title: '保证金',
+      dataIndex: 'amount',
+      key: 'amount',
+      width: 120,
+      sorter: true,
+      render: (amount) => amount ? `${Number(amount).toFixed(2)} USDT` : '-',
+    },
+    {
+      title: '交易订单数',
+      dataIndex: 'orderCount',
+      key: 'orderCount',
+      width: 120,
+      sorter: true,
+      render: (count) => count || 0,
+    },
+    {
+      title: '完成限时率(%)',
+      dataIndex: 'completionRate',
+      key: 'completionRate',
+      width: 140,
+      sorter: true,
+      render: (rate) => rate ? `${Number(rate).toFixed(2)}%` : '0%',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      width: 120,
+      sorter: true,
+      render: (status) => {
+        const item = statusMap[status] || { color: 'default', text: '未知' };
+        return <Tag color={item.color}>{item.text}</Tag>;
+      },
+    },
+    {
+      title: '原因',
+      dataIndex: 'reason',
+      key: 'reason',
+      width: 200,
+      ellipsis: true,
+      render: (reason) => reason || '-',
+    },
+    {
+      title: '申请时间',
+      dataIndex: 'createTime',
+      key: 'createTime',
+      width: 180,
+      sorter: true,
+    },
+  ];
+
+  // 5. 搜索字段配置
+  const searchFieldList = [
+    {
+      title: '用户ID',
+      dataIndex: 'userId',
+      key: 'SEARCH_EQ_userId',
+      type: 'text',
+    },
+    {
+      title: '登录名',
+      dataIndex: 'username',
+      key: 'SEARCH_LIKE_username',
+      type: 'text',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'SEARCH_EQ_status',
+      type: 'select',
+      options: [
+        { label: '认证通过', value: 0 },
+        { label: '未认证', value: 1 },
+      ],
+    },
+  ];
+
+  return (
+    <div>
+      {/* 主体列表 */}
+      <CmBasePage
+        columns={columns}
+        apiEndpoint="/otcMerchant/getList"
+        apiMethod="post"
+        searchFieldList={searchFieldList}
+        onAdd={handleAdd}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+        actionButtons={{
+          view: false,
+          edit: true,
+          delete: true,
+        }}
+        rowKey="id"
+      />
+
+      {/* 新增/编辑表单 */}
+      <DataForm
+        visible={formVisible}
+        title={editingRecord ? '修改商家信息' : '添加商家'}
+        initialValues={editingRecord || {}}
+        extraValues={{ id: editingRecord?.id }}
+        onCancel={() => setFormVisible(false)}
+        onSubmit={handleSubmit}
+        onClosed={() => setEditingRecord(null)}
+        loading={loading}
+        formType="modal"
+        width={800}
+      >
+        {editingRecord ? (
+          // 编辑模式：显示所有字段
+          <>
+            <Form.Item
+              name="userId"
+              label="用户ID"
+            >
+              <Input disabled />
+            </Form.Item>
+
+            <Form.Item
+              name="amount"
+              label="保证金"
+            >
+              <Input disabled placeholder="保证金金额" />
+            </Form.Item>
+
+            <Form.Item
+              name="orderCount"
+              label="交易订单数"
+              rules={[{ required: true, message: '请输入交易订单数' }]}
+            >
+              <InputNumber placeholder="请输入交易订单数" min={0} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="completionRate"
+              label="完成限时率(%)"
+              rules={[{ required: true, message: '请输入完成限时率' }]}
+            >
+              <InputNumber placeholder="请输入完成限时率" min={0} max={100} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="status"
+              label="状态"
+              rules={[{ required: true, message: '请选择状态' }]}
+            >
+              <Radio.Group>
+                <Radio value={0}>认证通过</Radio>
+                <Radio value={1}>未认证</Radio>
+              </Radio.Group>
+            </Form.Item>
+
+            <Form.Item
+              name="reason"
+              label="原因"
+            >
+              <TextArea placeholder="请输入原因" rows={3} />
+            </Form.Item>
+          </>
+        ) : (
+          // 新增模式：只需用户ID
+          <>
+            <Form.Item
+              name="userId"
+              label="用户ID"
+              rules={[{ required: true, message: '请输入用户ID' }]}
+            >
+              <InputNumber placeholder="请输入用户ID" min={1} style={{ width: '100%' }} />
+            </Form.Item>
+
+            <Form.Item
+              name="amount"
+              label="保证金金额"
+              rules={[{ required: true, message: '请输入保证金金额' }]}
+            >
+              <InputNumber placeholder="请输入保证金金额" min={0} precision={2} style={{ width: '100%' }} />
+            </Form.Item>
+          </>
+        )}
+      </DataForm>
+    </div>
+  );
+};
+
+export default OtcMerchantPage;

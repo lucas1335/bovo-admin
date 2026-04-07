@@ -1,0 +1,85 @@
+/* 佣金记录查询页面样式 */
+
+.commission-records-container {
+  padding: 24px;
+  background: #f0f2f5;
+  min-height: calc(100vh - 64px);
+}
+
+.commission-records-card {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.commission-records-card .ant-card-head {
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.commission-records-card .ant-tabs-nav {
+  margin-bottom: 24px;
+}
+
+.commission-records-card .ant-tabs-tab {
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 24px;
+}
+
+.commission-records-card .ant-tabs-tab-active {
+  color: #1890ff;
+}
+
+/* 表格样式优化 */
+.commission-records-card .ant-pro-table {
+  border-radius: 4px;
+}
+
+.commission-records-card .ant-table {
+  font-size: 14px;
+}
+
+.commission-records-card .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.commission-records-card .ant-table-tbody > tr:hover {
+  background: #f5f5f5;
+}
+
+/* 标签样式 */
+.commission-records-card .ant-tag {
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .commission-records-container {
+    padding: 16px;
+  }
+
+  .commission-records-card .ant-tabs-tab {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* 搜索表单样式 */
+.commission-records-card .ant-pro-table-search {
+  background: #fff;
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.commission-records-card .ant-pro-table-search .ant-form-item {
+  margin-bottom: 16px;
+}
+
+/* 工具栏样式 */
+.commission-records-card .ant-pro-table-list-toolbar {
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}

@@ -1,0 +1,9 @@
+node_modules/
+vue2/
+dist/
+old/
+nul
+.vscode/
+dist.zip
+dist-admin.zip
+dist-admin/

@@ -1,0 +1,152 @@
+# 墨小帮后台管理系统 - 项目概述
+
+## 项目简介
+
+墨小帮后台管理系统是一个基于 React 18 + Vite + Ant Design 5 构建的企业级后台管理平台，提供完整的系统管理和内容管理功能。
+
+## 技术栈
+
+### 核心技术
+- **React 18.2.0** - 前端框架
+- **Vite 5.0.8** - 构建工具
+- **React Router DOM 6.3.0** - 路由管理
+- **Ant Design 5.4.0** - UI 组件库
+
+### Ant Design Pro 组件
+- **@ant-design/pro-layout 7.22.7** - 布局组件
+- **@ant-design/pro-table 3.21.0** - 高级表格
+- **@ant-design/pro-form 2.32.0** - 高级表单
+
+### 其他依赖
+- **axios 1.3.4** - HTTP 请求
+- **dayjs 1.11.7** - 日期处理
+- **@wangeditor/editor 5.1.23** - 富文本编辑器
+- **@hello-pangea/dnd 18.0.1** - 拖拽功能
+
+## 项目结构
+
+```
+moxiaobang-admin/
+├── src/
+│   ├── api/                    # API 接口模块
+│   │   ├── base.js            # axios 实例和基础 CRUD
+│   │   ├── index.js           # API 统一导出
+│   │   └── modules/           # API 模块
+│   │       ├── auth.js        # 认证相关
+│   │       ├── system.js      # 系统管理
+│   │       ├── article.js     # 文章管理
+│   │       └── portal.js      # 门户内容
+│   │
+│   ├── components/             # 通用组件
+│   │   ├── CmBasePage.jsx    # 通用列表页面
+│   │   ├── DataForm.jsx      # 通用表单
+│   │   ├── CmUpload.jsx      # 图片上传
+│   │   ├── CmEditor.jsx      # 富文本编辑器
+│   │   ├── ProLayout.jsx     # 布局组件
+│   │   └── SchemaRenderer/   # 动态表单渲染器
+│   │
+│   ├── pages/                  # 页面组件
+│   │   ├── cm-system/        # 系统管理模块
+│   │   │   ├── user.jsx       # 用户管理
+│   │   │   ├── role.jsx       # 角色管理
+│   │   │   ├── menu.jsx       # 菜单管理
+│   │   │   ├── organ.jsx      # 组织管理
+│   │   │   ├── sysdic.jsx     # 字典管理
+│   │   │   └── log.jsx        # 日志管理
+│   │   │
+│   │   ├── cm-portal/        # 门户内容模块
+│   │   │   ├── article/       # 文章管理
+│   │   │   ├── product/       # 产品管理
+│   │   │   ├── video/         # 视频管理
+│   │   │   ├── feedback/      # 留言管理
+│   │   │   ├── base/          # 基础信息
+│   │   │   └── config/        # 配置管理
+│   │   │
+│   │   ├── system-setting/   # 系统设置
+│   │   ├── example/          # 示例页面
+│   │   ├── Login.jsx         # 登录页
+│   │   └── Dashboard.jsx     # 仪表盘
+│   │
+│   ├── router/                 # 路由配置
+│   │   ├── index.jsx         # 路由主入口
+│   │   ├── routesConfig.js   # 路由映射表
+│   │   └── guards.jsx        # 路由守卫
+│   │
+│   ├── contexts/              # React Context
+│   │   └── AuthContext.jsx   # 认证上下文
+│   │
+│   ├── config/                # 配置文件
+│   │   ├── menuConfig.jsx    # 菜单配置
+│   │   └── iconConfig.jsx    # 图标配置
+│   │
+│   ├── App.jsx               # 应用根组件
+│   └── main.jsx              # 应用入口
+│
+├── docs/                      # 项目文档
+├── public/                    # 静态资源
+├── vite.config.js            # Vite 配置
+├── package.json              # 项目依赖
+└── jsconfig.json             # JS 配置
+
+```
+
+## 核心特性
+
+### 1. 模块化架构
+- **系统管理模块 (cm-system)**：用户、角色、菜单、组织、字典、日志管理
+- **门户内容模块 (cm-portal)**：文章、产品、视频、留言、配置管理
+- **系统设置模块**：个人中心、通知中心、系统配置
+
+### 2. 通用组件封装
+- **CmBasePage**：提供列表展示、搜索、分页、CRUD 操作的统一方案
+- **DataForm**：提供 Modal/Drawer 形式的统一表单方案
+- **CmUpload**：统一的图片上传组件
+- **CmEditor**：富文本编辑器集成
+
+### 3. 动态路由系统
+- 支持静态路由配置
+- 支持基于后台菜单的动态路由加载
+- 路由权限控制
+
+### 4. 统一的 API 管理
+- 基于 axios 的 HTTP 客户端
+- 统一的请求/响应拦截
+- 自动 token 管理
+- 支持 form-data 和 JSON 格式
+
+### 5. 开发规范
+- 组件化开发
+- 统一的代码风格
+- 路径别名配置
+- ESLint 代码检查
+
+## 开发指南
+
+详见各专项文档：
+- [开发规范文档](./DEVELOPMENT_GUIDE.md)
+- [组件使用指南](./COMPONENT_GUIDE.md)
+- [API 接口规范](./API_SPECIFICATION.md)
+- [路由配置指南](./ROUTING_GUIDE.md)
+
+## 快速开始
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 构建生产版本
+npm run build
+
+# 预览生产构建
+npm run preview
+```
+
+## 开发服务器配置
+
+- **本地地址**：http://localhost:3000
+- **API 代理**：/api -> http://172.16.102.105:4002/
+
+可在 [vite.config.js](../vite.config.js) 中修改代理配置。

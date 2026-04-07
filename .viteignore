@@ -1,0 +1,10 @@
+# Vite ignore file
+# 排除不需要被 Vite 扫描的目录
+
+old-vue/
+.vscode/
+.idea/
+*.log
+dist/
+node_modules/
+.DS_Store
