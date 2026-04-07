@@ -8,9 +8,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # 配置变量
-IMAGE_NAME="${IMAGE_NAME:-bovo-admin}"
+IMAGE_NAME="${IMAGE_NAME:-}"
 IMAGE_TAG="${IMAGE_TAG:-latest}"
-REGISTRY="${REGISTRY:-your-registry}"
+REGISTRY="${REGISTRY:-}"
 NAMESPACE="${NAMESPACE:-bovo-admin}"
 BUILD_ENV="${BUILD_ENV:-production}"
 VITE_API_BASE_URL="${VITE_API_BASE_URL:-}"
@@ -20,6 +20,20 @@ declare -A ENV_API_URLS=(
     [test]="http://47.250.175.7:8080"
     [staging]="http://staging-api.example.com"
     [production]="http://47.250.175.7:8080"
+)
+
+# 环境对应的镜像名称（如果不指定则使用对应环境的默认值）
+declare -A ENV_IMAGE_NAMES=(
+    [test]="one-registry.ap-southeast-3.cr.aliyuncs.com/one-test/onepiece-bovo-admin"
+    [staging]="bovo-admin-staging"
+    [production]="bovo-admin"
+)
+
+# 环境对应的镜像仓库（如果不指定则使用对应环境的默认值）
+declare -A ENV_REGISTRIES=(
+    [test]=""
+    [staging]=""
+    [production]=""
 )
 
 # 检查 Docker 是否安装
@@ -244,9 +258,16 @@ show_help() {
     echo "  staging    -> http://staging-api.example.com"
     echo "  production -> http://47.250.175.7:8080"
     echo ""
+    echo "预设环境镜像名称:"
+    echo "  test       -> one-registry.ap-southeast-3.cr.aliyuncs.com/one-test/onepiece-bovo-admin"
+    echo "  staging    -> bovo-admin-staging"
+    echo "  production -> bovo-admin"
+    echo ""
+    echo "提示: 可通过 IMAGE_NAME 环境变量覆盖默认镜像名称"
+    echo ""
     echo "示例:"
     echo "  # 使用命令行参数（推荐）"
-    echo "  $0 build test           # 构建测试环境"
+    echo "  $0 build test           # 构建测试环境（使用默认镜像名）"
     echo "  $0 local staging        # 本地运行预发布环境"
     echo "  $0 k8s test             # 部署测试环境到 K8s"
     echo ""
@@ -256,8 +277,11 @@ show_help() {
     echo "  # 自定义 API 地址"
     echo "  VITE_API_BASE_URL=http://custom-api.com $0 build test"
     echo ""
+    echo "  # 自定义镜像名称"
+    echo "  IMAGE_NAME=my-custom-image $0 build test"
+    echo ""
     echo "  # 完整示例"
-    echo "  IMAGE_TAG=v1.0.0 REGISTRY=registry.example.com $0 k8s production"
+    echo "  IMAGE_TAG=v1.0.0 IMAGE_NAME=custom/image $0 k8s production"
 }
 
 # 主流程
@@ -278,6 +302,20 @@ main() {
     # 更新 BUILD_ENV 变量供后续使用
     export BUILD_ENV="$env"
 
+    # 如果用户没有指定镜像名称，使用环境特定的默认值
+    if [ -z "$IMAGE_NAME" ]; then
+        IMAGE_NAME="${ENV_IMAGE_NAMES[$BUILD_ENV]}"
+    fi
+
+    # 如果用户没有指定仓库，使用环境特定的默认值
+    if [ -z "$REGISTRY" ]; then
+        REGISTRY="${ENV_REGISTRIES[$BUILD_ENV]}"
+    fi
+
+    # 导出变量供后续使用
+    export IMAGE_NAME
+    export REGISTRY
+
     # 显示当前配置
     echo -e "${GREEN}========================================${NC}"
     echo -e "${GREEN}  Bovo Admin Docker 部署脚本${NC}"
@@ -288,6 +326,8 @@ main() {
     else
         echo -e "${BLUE}API地址: ${YELLOW}${ENV_API_URLS[$BUILD_ENV]}${NC}"
     fi
+    echo -e "${BLUE}镜像: ${YELLOW}${IMAGE_NAME}${NC}"
+    echo -e "${BLUE}标签: ${YELLOW}${IMAGE_TAG}${NC}"
     echo -e "${GREEN}========================================${NC}"
 
     # 执行命令

@@ -1,48 +1,52 @@
-# 墨小帮后台管理系统
+# BOVO 交易所后台管理系统
 
 基于 React + Ant Design + Vite 的企业级后台管理系统
 
-## 📖 项目文档
+## ✨ 特性
 
-**完整的开发文档已整理完成，请查看 [docs/](./docs) 目录：**
+- 🔐 **用户认证** - 完整的登录/登出流程
+- 📊 **数据管理** - 丰富的数据表格和表单组件
+- 🎨 **现代化UI** - Ant Design 5 组件库
+- ⚡ **快速构建** - Vite 构建，开发体验极佳
+- 🐳 **容器化部署** - 支持 Docker + Kubernetes
+- 📱 **响应式布局** - 适配各种屏幕尺寸
+- 🔔 **通知中心** - 实时消息通知
+- 🌐 **多环境支持** - test / staging / production
 
-- **[文档中心](./docs/README.md)** - 文档导航和快速索引
-- **[项目概述](./docs/PROJECT_OVERVIEW.md)** - 项目简介、技术栈、目录结构
-- **[快速开始](./docs/QUICK_START.md)** - 环境准备、项目启动、开发流程
-- **[开发规范](./docs/DEVELOPMENT_GUIDE.md)** - 代码规范、组件使用、业务开发规范
-- **[组件使用指南](./docs/Component_GUIDE.md)** - 核心组件使用方法和示例
-- **[API 接口规范](./docs/API_SPECIFICATION.md)** - API 定义规范、请求响应格式
-- **[路由配置指南](./docs/ROUTING_GUIDE.md)** - 路由配置、动态路由、菜单管理
-- **[业务实现规则](./docs/BUSINESS_RULES.md)** - 核心业务实现规则总结
-
-## 功能特性
-
-- 🔐 用户认证与授权
-- 📊 数据仪表盘
-- 👤 个人中心管理
-- ⚙️ 系统设置管理
-- 👥 用户管理
-- 🎭 角色管理
-- 🔑 权限管理
-- 🎨 现代化UI设计
-- 📱 响应式布局
-- ⚡ Vite快速构建
-- 🔗 菜单路由统一配置（支持API调用）
-- 🌐 外部链接跳转功能
-- 🔔 通知中心（带角标）
-- 📋 动态菜单加载
-- 📝 通用表单组件（支持弹出层和抽屉两种形式）
-
-## 技术栈
+## 🛠 技术栈
 
 - **React 18** - 前端框架
-- **Ant Design 5** - UI组件库
-- **Vite** - 快速构建工具
+- **Ant Design 5** - UI 组件库
+- **Vite 5** - 构建工具
 - **React Router 6** - 路由管理
-- **Axios** - HTTP客户端
+- **Axios** - HTTP 客户端
 - **Day.js** - 日期处理
+- **Docker** - 容器化
+- **Kubernetes** - 编排平台
 
-## 快速开始
+## 📚 文档
+
+### 开发文档
+
+| 文档 | 说明 |
+|------|------|
+| [项目概述](docs/开发规范/项目概述.md) | 项目简介、技术栈、目录结构 |
+| [快速开始](docs/开发规范/快速开始.md) | 环境准备、项目启动、开发流程 |
+| [开发规范](docs/开发规范/开发规范.md) | 代码规范、组件使用规范 |
+| [组件指南](docs/开发规范/组件指南.md) | 核心组件使用方法和示例 |
+| [API规范](docs/开发规范/API规范.md) | API定义规范、请求响应格式 |
+| [路由配置](docs/开发规范/路由配置.md) | 路由配置、动态路由、菜单管理 |
+| [业务规则](docs/开发规范/业务规则.md) | 核心业务实现规则总结 |
+| [接口返回结构](docs/开发规范/接口返回结构.md) | 后端接口返回结构说明 |
+
+### 部署文档
+
+| 文档 | 说明 |
+|------|------|
+| [部署指南](docs/部署文档/DEPLOY.md) | Docker + K8s 部署 |
+| [分步指南](docs/部署文档/STEPS.md) | 详细部署步骤 |
+
+## 🚀 快速开始
 
 ### 安装依赖
 
@@ -50,11 +54,13 @@
 npm install
 ```
 
-### 启动开发服务器
+### 开发环境
 
 ```bash
 npm run dev
 ```
+
+访问 http://localhost:3000
 
 ### 构建生产版本
 
@@ -62,223 +68,144 @@ npm run dev
 npm run build
 ```
 
-### 预览生产版本
+## ⚙️ 环境配置
+
+| 环境 | API 地址 | 说明 |
+|------|----------|------|
+| development | /api | 使用代理，开发环境 |
+| test | http://47.250.175.7:8080 | 测试环境 |
+| staging | http://staging-api.example.com | 预发布环境 |
+| production | http://47.250.175.7:8080 | 生产环境 |
+
+## 📦 部署
+
+### 快速部署
 
 ```bash
-npm run preview
+# 测试环境
+./deploy.sh build test
+
+# 生产环境
+./deploy.sh build production
 ```
 
-### 环境变量配置
-
-项目支持通过环境变量进行配置。创建 `.env` 文件：
+### Docker 部署
 
 ```bash
-# API配置
-VITE_API_URL=http://localhost:8080/api
+# 构建
+docker build --build-arg BUILD_ENV=test -t bovo-admin:test .
 
-# 应用配置
-VITE_APP_TITLE=JAVA-CM Admin
-VITE_APP_VERSION=1.0.0
+# 运行
+docker run -d -p 8080:80 bovo-admin:test
 ```
 
-## 项目结构
+### Kubernetes 部署
 
-```
-src/
-├── components/          # 公共组件
-│   ├── Layout.jsx      # 主布局组件
-│   ├── DataGrid.jsx    # 通用数据表格组件
-│   └── DataForm.jsx    # 通用表单组件
-├── config/             # 配置文件
-│   └── menuConfig.jsx  # 菜单配置
-├── contexts/           # React Context
-│   └── AuthContext.jsx  # 认证上下文
-├── pages/              # 页面组件
-│   ├── Login.jsx       # 登录页
-│   ├── Dashboard.jsx   # 仪表盘
-│   ├── Profile.jsx     # 个人中心
-│   ├── SystemManagement.jsx  # 系统管理
-│   ├── UserManagement.jsx    # 用户管理
-│   ├── RoleManagement.jsx    # 角色管理
-│   ├── PermissionManagement.jsx  # 权限管理
-│   ├── NotificationCenter.jsx # 通知中心
-│   └── FormDemo.jsx          # 表单演示
-├── services/           # API服务
-│   └── menuService.js  # 菜单和通知服务
-├── App.jsx             # 主应用组件
-├── main.jsx            # 应用入口
-└── index.css           # 全局样式
+```bash
+# 1. 登录镜像仓库
+docker login --username=xxx one-registry.ap-southeast-3.cr.aliyuncs.com
+
+# 2. 构建并推送
+./deploy.sh build test
+docker push one-registry.ap-southeast-3.cr.aliyuncs.com/one-test/onepiece-bovo-admin:latest
+
+# 3. 部署到 K8s
+kubectl apply -f k8s/
 ```
 
-## 页面说明
+详细部署文档请查看 [部署指南](docs/部署文档/DEPLOY.md)
 
-### 登录页 (`/login`)
-- 用户登录界面
-- 表单验证
-- 记住登录状态
+## 📁 项目结构
 
-### 仪表盘 (`/dashboard`)
-- 数据统计展示
-- 图表和进度条
-- 最近活动记录
+```
+bovo-admin/
+├── src/
+│   ├── api/              # API 接口
+│   │   └── modules/      # API 模块
+│   ├── components/       # 公共组件
+│   │   ├── CmBasePage/   # 基础页面组件
+│   │   ├── CmUpload/     # 上传组件
+│   │   └── CmEditor/     # 编辑器组件
+│   ├── config/           # 配置文件
+│   ├── pages/            # 页面组件
+│   │   ├── login/        # 登录
+│   │   ├── dashboard/    # 仪表盘
+│   │   └── system/       # 系统管理
+│   ├── utils/            # 工具函数
+│   ├── App.jsx           # 主应用
+│   └── main.jsx          # 入口文件
+├── docs/
+│   ├── 开发规范/         # 开发文档
+│   └── 部署文档/         # 部署文档
+├── k8s/                  # Kubernetes 配置
+├── deploy.sh             # 部署脚本
+├── Dockerfile            # Docker 配置
+├── nginx.conf            # Nginx 配置
+└── vite.config.js        # Vite 配置
+```
 
-### 个人中心 (`/profile`)
-- 个人信息编辑
-- 密码修改
-- 头像上传
+## 🧩 核心组件
 
-### 系统管理 (`/system`)
-- 基本设置
-- 安全设置
-- 邮件配置
-- 数据设置
-
-### 用户管理 (`/users`)
-- 用户列表展示
-- 高级搜索功能
-- 添加/编辑/删除用户
-- 用户状态管理
-
-### 角色管理 (`/roles`)
-- 角色列表管理
-- 角色权限分配
-- 角色状态控制
-- 角色用户统计
-
-### 权限管理 (`/permissions`)
-- 权限列表管理
-- 权限类型分类
-- 权限模块管理
-- 权限状态控制
-
-## 公共组件
-
-### DataGrid 组件
-通用的数据表格组件，支持以下功能：
-- 可配置的列定义
+### CmBasePage
+通用列表页面组件，支持：
+- 数据表格展示
 - 搜索功能
-- 新增/编辑/删除操作
-- 分页功能
-- 加载状态
-- 自定义操作按钮
+- 新增/编辑/删除
+- 分页
+- 工具栏操作
 
-### DataForm 组件
-通用的表单组件，支持以下功能：
-- 多种表单字段类型（输入框、选择器、开关等）
-- 表单验证
-- 两种展示形式：弹出层和抽屉
-- 可配置的表单字段
-- 支持多种抽屉位置和尺寸
+### CmUpload
+图片上传组件，支持：
+- 多图上传
+- 图片预览
+- 限制数量和大小
 
-#### 使用示例：
+### CmEditor
+富文本编辑器，支持：
+- 图片上传
+- 代码高亮
+- 表格编辑
+- 全屏模式
 
-```jsx
-// 弹出层形式（默认）
-<DataForm
-  visible={formVisible}
-  title="表单标题"
-  fields={formFields}
-  formType="modal"
-  width={600}
-  onCancel={handleCancel}
-  onSubmit={handleSubmit}
-/>
+## 📖 开发规范
 
-// 抽屉形式
-<DataForm
-  visible={formVisible}
-  title="表单标题"
-  fields={formFields}
-  formType="drawer"
-  drawerPlacement="right"
-  drawerSize="large"
-  onCancel={handleCancel}
-  onSubmit={handleSubmit}
-/>
-```
+### 添加新页面
 
-## 默认账户
+1. 在 `src/pages/` 创建页面组件
+2. 在 `src/api/modules/` 创建 API 模块
+3. 配置路由和菜单
+
+### 代码规范
+
+- 使用 ESLint 进行代码检查
+- 组件使用函数式组件 + Hooks
+- API 统一放在 `src/api/modules/`
+- 样式使用 Ant Design 主题定制
+
+## 👤 默认账户
 
 - **用户名**: admin
 - **密码**: admin123
 
-## 开发说明
-
-### 添加新页面
-
-1. 在 `src/pages/` 目录下创建新组件
-2. 在 `src/App.jsx` 中添加路由配置
-3. 在 `src/components/Layout.jsx` 中添加菜单项
-
-### 使用公共组件
-
-```jsx
-import DataGrid from '../components/DataGrid';
-import DataForm from '../components/DataForm';
-
-// 使用DataGrid
-<DataGrid
-  title="数据列表"
-  columns={columns}
-  dataSource={data}
-  searchFields={searchFields}
-  onAdd={handleAdd}
-  onEdit={handleEdit}
-  onDelete={handleDelete}
-/>
-
-// 使用DataForm
-<DataForm
-  visible={formVisible}
-  title="表单标题"
-  fields={formFields}
-  onCancel={handleCancel}
-  onSubmit={handleSubmit}
-/>
-```
-
-### 自定义主题
-
-可以通过修改 Ant Design 的主题配置来自定义样式：
-
-```javascript
-import { ConfigProvider } from 'antd';
-
-<ConfigProvider
-  theme={{
-    token: {
-      colorPrimary: '#1890ff',
-    },
-  }}
->
-  {/* 你的应用 */}
-</ConfigProvider>
-```
-
-## 构建优化
-
-使用 Vite 构建工具，提供：
-- 快速的开发服务器启动
-- 热模块替换 (HMR)
-- 优化的生产构建
-- 更好的开发体验
-
-## 部署
-
-### 构建项目
+## 💻 常用命令
 
 ```bash
+# 开发
+npm run dev
+
+# 构建
 npm run build
+
+# 预览
+npm run preview
+
+# 代码检查
+npm run lint
+
+# 部署
+./deploy.sh build test
 ```
 
-### 部署到服务器
-
-将 `dist` 目录下的文件部署到你的Web服务器即可。
-
-## 许可证
+## 📄 许可证
 
 MIT License
-
-## 贡献
-
-欢迎提交 Issue 和 Pull Request！ 
