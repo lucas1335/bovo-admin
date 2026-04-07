@@ -9,8 +9,10 @@ import {
   addSpontaneousCoin,
   updateSpontaneousCoin,
   deleteSpontaneousCoin,
-  getKlineSymbolList,
 } from '@api/modules/spontaneousCoin';
+import {
+  listKlineSymbol as getKlineSymbolList,
+} from '@api/modules/klineSymbol';
 
 const { confirm } = Modal;
 const { Option } = Select;

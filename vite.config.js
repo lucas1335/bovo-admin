@@ -16,9 +16,8 @@ export default defineConfig(({ mode }) => {
       },
       proxy: {
         '/api': {
-          target: 'http://127.0.0.1:8080/',
-          // target: 'http://172.16.102.105:4002/',
-          // target: 'http://47.106.196.236:5002/CM-API/',
+          // target: 'http://127.0.0.1:8080/',
+          target: 'http://47.250.175.7:8080/',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '/')
         }

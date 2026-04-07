@@ -17,12 +17,12 @@ import DataForm from '@components/DataForm';
 import CmEditor from '@components/CmEditor';
 import CmUpload from '@components/CmUpload';
 import {
-  getSetterList,
-  getSetterDetail,
-  saveSetter,
+  listSetter as getSetterList,
+  getSetter as getSetterDetail,
+  addSetter as saveSetter,
   updateSetter,
-  deleteSetter
-} from '@api';
+  delSetter as deleteSetter
+} from '@api/modules/setter';
 
 const { Option } = Select;
 
